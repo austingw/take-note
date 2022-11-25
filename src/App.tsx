@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Container } from "react-bootstrap";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NewNote from "./NewNote";
+import NoteLayout from "./NoteLayout";
 import NoteList from "./NoteList";
 import useLocalStorage from "./useLocalStorage";
 import { v4 as uuidV4 } from "uuid";
@@ -75,7 +76,7 @@ function App() {
             />
           }
         />
-        <Route path="/:id">
+        <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<h1>Show</h1>} />
           <Route path="edit" element={<h1>Edit</h1>} />
         </Route>
