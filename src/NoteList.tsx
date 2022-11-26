@@ -23,15 +23,24 @@ type SimplifiedNote = {
 type NoteListProps = {
   availableTags: Tag[];
   notes: Note[];
+  deleteTag: (id: string) => void;
+  updateTag: (id: string, label: string) => void;
 };
 
 type EditTagsModalProps = {
   show: boolean;
   availableTags: Tag[];
   handleClose: () => void;
+  deleteTag: (id: string) => void;
+  updateTag: (id: string, label: string) => void;
 };
 
-export default function NoteList({ availableTags, notes }: NoteListProps) {
+export default function NoteList({
+  availableTags,
+  notes,
+  updateTag,
+  deleteTag,
+}: NoteListProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -118,6 +127,8 @@ export default function NoteList({ availableTags, notes }: NoteListProps) {
         show={modalOpen}
         handleClose={() => setModalOpen(false)}
         availableTags={availableTags}
+        updateTag={updateTag}
+        deleteTag={deleteTag}
       />
     </>
   );
@@ -159,6 +170,8 @@ function EditTagsModal({
   availableTags,
   handleClose,
   show,
+  updateTag,
+  deleteTag,
 }: EditTagsModalProps) {
   return (
     <Modal show={show} onHide={handleClose}>
@@ -171,10 +184,19 @@ function EditTagsModal({
             {availableTags.map((tag) => (
               <Row key={tag.id}>
                 <Col>
-                  <Form.Control type="text" value={tag.label} />
+                  <Form.Control
+                    type="text"
+                    value={tag.label}
+                    onChange={(e) => updateTag(tag.id, e.target.value)}
+                  />
                 </Col>
                 <Col xs="auto">
-                  <Button variant="outline-danger">&times;</Button>
+                  <Button
+                    onClick={() => deleteTag(tag.id)}
+                    variant="outline-danger"
+                  >
+                    &times;
+                  </Button>
                 </Col>
               </Row>
             ))}
