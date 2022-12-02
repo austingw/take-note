@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useMemo } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NewNote from "./NewNote";
 import NoteDisplay from "./NoteDisplay";
@@ -47,6 +47,8 @@ function App() {
       };
     });
   }, [notes, tags]);
+
+  function toggleTheme() {}
 
   function onCreateNote({ tags, ...data }: NoteData) {
     setNotes((prevNotes) => {
@@ -99,6 +101,7 @@ function App() {
 
   return (
     <Container className="ny-4">
+      <h1 className="text-center mb-4">Take Note 📝</h1>
       <Routes>
         <Route
           path="/"
