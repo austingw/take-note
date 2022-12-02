@@ -79,11 +79,7 @@ export default function NoteForm({
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <MDEditor value={value} onChange={setValue} />
-          <MDEditor.Markdown
-            source={value}
-            style={{ whiteSpace: "pre-wrap" }}
-          />
+          <MDEditor value={value} onChange={setValue} data-color-mode="light" />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
           <Button type="submit" variant="outline-primary">
