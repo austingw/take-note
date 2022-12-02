@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { NoteData, Tag } from "./App";
 import CreatableReactSelect from "react-select/creatable";
 import { v4 as uuidV4 } from "uuid";
+import MDEditor from "@uiw/react-md-editor";
 
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
@@ -23,13 +24,14 @@ export default function NoteForm({
   const markdownRef = useRef<HTMLTextAreaElement>(null);
   const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
+  const [value, setValue] = useState<string>("Enter text here!");
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     onSubmit({
       title: titleRef.current!.value,
-      markdown: markdownRef.current!.value,
+      markdown: value,
       tags: selectedTags,
     });
     navigate("..");
@@ -77,12 +79,10 @@ export default function NoteForm({
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <Form.Control
-            ref={markdownRef}
-            required
-            as="textarea"
-            rows={15}
-            defaultValue={markdown}
+          <MDEditor value={value} onChange={setValue} />
+          <MDEditor.Markdown
+            source={value}
+            style={{ whiteSpace: "pre-wrap" }}
           />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
