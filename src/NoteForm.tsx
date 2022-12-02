@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FormEvent, useRef, useState, ChangeEvent } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
