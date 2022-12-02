@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState, ChangeEvent } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { NoteData, Tag } from "./App";
@@ -21,10 +21,10 @@ export default function NoteForm({
   tags = [],
 }: NoteFormProps) {
   const titleRef = useRef<HTMLInputElement>(null);
-  const markdownRef = useRef<HTMLTextAreaElement>(null);
+  //const markdownRef = useRef<HTMLTextAreaElement>(null);
   const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
-  const [value, setValue] = useState<string>("Enter text here!");
+  const [value, setValue] = useState<string>(markdown);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -79,7 +79,12 @@ export default function NoteForm({
         </Row>
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
-          <MDEditor value={value} onChange={setValue} data-color-mode="light" />
+          <MDEditor
+            value={value}
+            onChange={setValue}
+            //onChange={ChangeEvent<HTMLTextAreaElement>}
+            data-color-mode="light"
+          />
         </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
           <Button type="submit" variant="outline-primary">

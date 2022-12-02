@@ -48,8 +48,6 @@ function App() {
     });
   }, [notes, tags]);
 
-  function toggleTheme() {}
-
   function onCreateNote({ tags, ...data }: NoteData) {
     setNotes((prevNotes) => {
       return [
