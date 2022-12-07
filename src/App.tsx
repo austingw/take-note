@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useMemo } from "react";
 import { Button, Container } from "react-bootstrap";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import NewNote from "./NewNote";
 import NoteDisplay from "./NoteDisplay";
 import { NoteLayout } from "./NoteLayout";
@@ -98,8 +98,11 @@ function App() {
   }
 
   return (
-    <Container className="ny-4">
-      <h1 className="text-center mb-4">Take Note 📝</h1>
+    <Container className="ny-4 pt-4">
+      <Link to="/">
+        <h1 className="text-center mb-4">Take Note 📝</h1>
+      </Link>
+      <hr />
       <Routes>
         <Route
           path="/"
